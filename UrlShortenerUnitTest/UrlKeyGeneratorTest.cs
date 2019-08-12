@@ -12,7 +12,7 @@ namespace UrlShortenerUnitTest
         private const int ExpectedKeyLength = 7;
 
         [Fact]
-        public void WhenGenerateAKeyOneTime_ThenRandomKeyIsGenerated()
+        public void WhenGenerateAKeyOneTime_ThenRandomUniqueKeyIsGenerated()
         {
             var generator = new UrlKeyGenerator();
             var key =  generator.Generate();
@@ -21,12 +21,12 @@ namespace UrlShortenerUnitTest
         }
 
         [Fact]
-        public void WhenGenerateAKeyMultipleTimes_ThenRandomKeyIsGenerated()
+        public void WhenGenerateAKeyMultipleTimes_ThenRandomUniqueKeysAreGenerated()
         {
             var generator = new UrlKeyGenerator();
             var keyList = new List<string>();
 
-            for(int i=0;i< 1000000;i++)
+            for(int i=0;i< 10000;i++)
             {
                 var key = generator.Generate();
                 keyList.Should().NotContain(key);

@@ -7,7 +7,7 @@ namespace UrlShortener.Services
 {
     public interface IUrlStorage
     {
-        void Add(string key, string uri);
+        bool Add(string key, string uri);
         string Get(string key);
     }
 }

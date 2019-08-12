@@ -5,3 +5,5 @@
 /UrlShortener/obj
 /UrlShortener/bin/Debug/netcoreapp2.1
 /.vs
+/UrlShortenerUnitTest/bin/Debug/netcoreapp2.1
+/UrlShortenerUnitTest/obj

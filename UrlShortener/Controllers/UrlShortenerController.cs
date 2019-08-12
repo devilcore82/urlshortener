@@ -28,17 +28,28 @@ namespace UrlShortener.Controllers
         public IActionResult Get(string id)
         {
             var urlOriginal = storage.Get(id);
+
+            if(string.IsNullOrEmpty(urlOriginal))
+            {
+                return NotFound();
+            }
+
             return Redirect(urlOriginal);
         }
 
         [HttpPost]
-        public IActionResult Post()
+        public async Task<IActionResult> Post()
         {
             var uriToShorten = string.Empty;
 
             using (var reader = new StreamReader(Request.Body))
             {
-                uriToShorten = reader.ReadToEnd();
+                uriToShorten = await reader.ReadToEndAsync();
+
+                if(!Uri.IsWellFormedUriString(uriToShorten, UriKind.Absolute))
+                {
+                    return BadRequest($"Invalid Url provided");
+                }
             }
 
             var urlKey = generator.Generate();

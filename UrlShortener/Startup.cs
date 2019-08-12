@@ -29,9 +29,8 @@ namespace UrlShortener
             services.AddHttpContextAccessor();
             services.AddSingleton<IUrlKeyGenerator, UrlKeyGenerator>();
             services.AddSingleton<IUrlStorage, InMemoryUrlStorage>();
-            //services.AddSingleton<IUrlShortenerService>(provider => new UrlShortenerService(new Uri("https://x"), provider.GetRequiredService<IUrlStorage>()));
-            services.AddSingleton<IUrlShortenerService, UrlShortenerService>();
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);           
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            services.AddCors();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

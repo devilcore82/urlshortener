@@ -10,9 +10,9 @@ namespace UrlShortener.Services
     {
         private static ConcurrentDictionary<string, string> storage = new ConcurrentDictionary<string, string>();
 
-        public void Add(string key, string uri)
+        public bool Add(string key, string uri)
         {
-            storage.TryAdd(key, uri);
+            return storage.TryAdd(key, uri);
         }
 
         public string Get(string key)

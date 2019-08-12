@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.329
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UrlShortener", "UrlShortener\UrlShortener.csproj", "{1A6B15FF-A4BE-45AC-9872-C01923B09111}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1A6B15FF-A4BE-45AC-9872-C01923B09111}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1A6B15FF-A4BE-45AC-9872-C01923B09111}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1A6B15FF-A4BE-45AC-9872-C01923B09111}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1A6B15FF-A4BE-45AC-9872-C01923B09111}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {A2BEFE7D-BB88-436C-99AF-BA60DBBDEC06}
+	EndGlobalSection
+EndGlobal

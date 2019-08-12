@@ -53,7 +53,10 @@ namespace UrlShortener.Controllers
             }
 
             var urlKey = generator.Generate();
-            storage.Add(urlKey, uriToShorten);
+            if(!storage.Add(urlKey, uriToShorten))
+            {
+                return new ServiceUnavailableResult("Unable to shorten Url.  Please try again");
+            }
 
             return Ok(new Uri(BaseUri, urlKey));
         }       

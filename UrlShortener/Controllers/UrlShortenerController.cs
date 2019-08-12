@@ -1,15 +1,25 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using UrlShortener.Services;
 
 namespace UrlShortener.Controllers
 {
-    [Route("api/[controller]")]
+    //[Route("api/[controller]")]
+    [Route("/")]
     [ApiController]
-    public class ValuesController : ControllerBase
+    public class UrlShortenerController : ControllerBase
     {
+        private readonly IUrlShortenerService service;
+
+        public UrlShortenerController(IUrlShortenerService service)
+        {
+            this.service = service;
+        }
+
         // GET api/values
         [HttpGet]
         public ActionResult<IEnumerable<string>> Get()
@@ -25,9 +35,23 @@ namespace UrlShortener.Controllers
         }
 
         // POST api/values
+        //[HttpPost]
+        //public IActionResult Post([FromBody] string uriToShorten)
+        //{
+        //    return Ok(service.Create(new Uri(uriToShorten)));
+        //}
+
         [HttpPost]
-        public void Post([FromBody] string value)
+        public IActionResult Post()
         {
+            var uriToShorten = string.Empty;
+
+            using (var reader = new StreamReader(Request.Body))
+            {
+                uriToShorten = reader.ReadToEnd();
+            }
+
+            return Ok(service.Create(new Uri(uriToShorten)));
         }
 
         // PUT api/values/5

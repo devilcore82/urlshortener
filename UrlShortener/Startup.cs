@@ -10,6 +10,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using UrlShortener.Services;
 
 namespace UrlShortener
 {
@@ -25,7 +26,11 @@ namespace UrlShortener
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            services.AddHttpContextAccessor();
+            services.AddSingleton<IUrlStorage, InMemoryUrlStorage>();
+            //services.AddSingleton<IUrlShortenerService>(provider => new UrlShortenerService(new Uri("https://x"), provider.GetRequiredService<IUrlStorage>()));
+            services.AddSingleton<IUrlShortenerService, UrlShortenerService>();
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);           
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

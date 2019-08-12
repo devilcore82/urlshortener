@@ -26,5 +26,10 @@ steps:
     projects: '**/UrlShortenerUnitTest.csproj'
 - task: DotNetCoreCLI@2
   inputs:
+    command: 'pack'
+    packagesToPack: '**/*UrlShortener.csproj'
+    versioningScheme: 'off'
+- task: DotNetCoreCLI@2
+  inputs:
     command: 'publish'
     publishWebProjects: true

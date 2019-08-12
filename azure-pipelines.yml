@@ -24,17 +24,4 @@ steps:
   inputs:
     command: 'test'
     projects: '**/UrlShortenerUnitTest.csproj'
-- task: DotNetCoreCLI@2
-  inputs:
-    command: 'pack'
-    packagesToPack: '**/*UrlShortener.csproj'
-    versioningScheme: 'off'
-- task: DotNetCoreCLI@2
-  inputs:
-    command: 'publish'
-    publishWebProjects: true
-- task: PublishBuildArtifacts@1
-  inputs:
-    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
-    ArtifactName: 'drop'
-    publishLocation: 'Container'
+- script: dotnet publish --output $(Build.ArtifactStagingDirectory)

@@ -27,6 +27,7 @@ namespace UrlShortener
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddHttpContextAccessor();
+            services.AddSingleton<IUrlKeyGenerator, UrlKeyGenerator>();
             services.AddSingleton<IUrlStorage, InMemoryUrlStorage>();
             //services.AddSingleton<IUrlShortenerService>(provider => new UrlShortenerService(new Uri("https://x"), provider.GetRequiredService<IUrlStorage>()));
             services.AddSingleton<IUrlShortenerService, UrlShortenerService>();

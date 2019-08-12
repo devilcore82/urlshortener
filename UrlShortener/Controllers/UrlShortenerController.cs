@@ -7,39 +7,29 @@ using Microsoft.AspNetCore.Mvc;
 using UrlShortener.Services;
 
 namespace UrlShortener.Controllers
-{
-    //[Route("api/[controller]")]
+{ 
     [Route("/")]
     [ApiController]
     public class UrlShortenerController : ControllerBase
     {
-        private readonly IUrlShortenerService service;
+        private readonly IUrlKeyGenerator generator;
+        private readonly IUrlStorage storage;
 
-        public UrlShortenerController(IUrlShortenerService service)
-        {
-            this.service = service;
-        }
+        private Uri BaseUri => new Uri($"{Request.Scheme}://{Request.Host.ToString()}");
 
-        // GET api/values
-        [HttpGet]
-        public ActionResult<IEnumerable<string>> Get()
+        public UrlShortenerController(IUrlKeyGenerator generator, IUrlStorage storage)
         {
-            return new string[] { "value1", "value2" };
+            this.generator = generator;
+            this.storage = storage;
         }
 
         // GET api/values/5
         [HttpGet("{id}")]
-        public ActionResult<string> Get(int id)
+        public IActionResult Get(string id)
         {
-            return "value";
+            var urlOriginal = storage.Get(id);
+            return Redirect(urlOriginal);
         }
-
-        // POST api/values
-        //[HttpPost]
-        //public IActionResult Post([FromBody] string uriToShorten)
-        //{
-        //    return Ok(service.Create(new Uri(uriToShorten)));
-        //}
 
         [HttpPost]
         public IActionResult Post()
@@ -51,19 +41,10 @@ namespace UrlShortener.Controllers
                 uriToShorten = reader.ReadToEnd();
             }
 
-            return Ok(service.Create(new Uri(uriToShorten)));
-        }
+            var urlKey = generator.Generate();
+            storage.Add(urlKey, uriToShorten);
 
-        // PUT api/values/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
-        }
-
-        // DELETE api/values/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
-        }
+            return Ok(new Uri(BaseUri, urlKey));
+        }       
     }
 }

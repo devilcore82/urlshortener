@@ -3,3 +3,5 @@
 ################################################################################
 
 /UrlShortener/obj
+/UrlShortener/bin/Debug/netcoreapp2.1
+/.vs
